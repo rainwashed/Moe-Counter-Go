@@ -1,7 +1,7 @@
 # 当前配置只是用于测试，不确定能正确构建和运行，请自行修改调整
 
 # 构建阶段
-FROM golang:1.21-alpine AS builder
+FROM golang:tip-alpine3.22 AS builder
 WORKDIR /app
 COPY . .
 RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-w -s" -o moe-counter

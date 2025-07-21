@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  moe_counter_go:
+    image: rainwashed/moe-counter-go:latest
+    container_name: moe_counter_go
+    # No port expose necessary if using a cloudflare tunnel setup where it can be pointed to internal net http://moe_counter_go
+    expose:
+      - "8088"
+    volumes:
+      - ./data/:/data/
+    networks:
+      - internal_net
+    restart: unless-stopped
+
+  # Use cloudflared to host without needing port forwarding or DNS updating.
+  # cloudflared:
+  #   image: cloudflare/cloudflared
+  #   container_name: cloudflared
+  #   command: tunnel run --token <token>
+  #   depends_on:
+  #     osus:
+  #       condition: service_started
+  #   networks:
+  #     - internal_net
+  #   restart: unless-stopped
+
+networks:
+  internal_net:
+    driver: bridge
