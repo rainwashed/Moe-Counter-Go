@@ -19,7 +19,7 @@ services:
   #   container_name: cloudflared
   #   command: tunnel run --token <token>
   #   depends_on:
-  #     osus:
+  #     moe_counter_go:
   #       condition: service_started
   #   networks:
   #     - internal_net
